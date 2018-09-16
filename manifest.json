@@ -1,0 +1,15 @@
+{
+	"name": "Translation Sniffer",
+	"version": "1.0",
+	"description": "Plugin for capturing words you are translating with dictionary",
+	"manifest_version": 2,
+	"permissions": [
+		"webRequest",
+		"storage",
+		"<all_urls>"
+	],
+	"background": {
+		"scripts": ["sniffer.js"],
+		"persistent": true
+	}
+}
