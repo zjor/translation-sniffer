@@ -19,7 +19,7 @@ const filter = {
 const storeMultitran = (req) => {
 	const resource = "multitran"
 	const regex = /.*?:\/\/.*?\.multitran\.ru\/.*/
-	if (regex.test(req.url)) {
+	if (req.type == "main_frame" && regex.test(req.url)) {
 		const word = /s=(\w*)/.exec(req.url)
 		if (word) {
 			chrome.storage.local.get([resource], (dictionary) => {
@@ -55,4 +55,8 @@ chrome.webRequest.onBeforeRequest.addListener(function(event) {
   console.log(event)
   storeMultitran(event)
 }, filter);
+
+chrome.browserAction.onClicked.addListener((event) => {
+	chrome.tabs.create({ url: 'history.html' })
+})
 
