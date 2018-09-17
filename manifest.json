@@ -11,7 +11,7 @@
 	],
 	"browser_action": {},
 	"background": {
-		"scripts": ["sniffer.js"],
-		"persistent": true
+		"page": "./background/background.html"
+		// "persistent": false
 	}
 }
