@@ -1,3 +1,6 @@
+import get from '../libs/lodash/get.js'
+import set from '../libs/lodash/set.js'
+
 const slovnikSeznam = (req) => {
     const resource = "slovnik-seznam"
     
@@ -11,27 +14,15 @@ const slovnikSeznam = (req) => {
             chrome.storage.local.get([resource], (dictionary) => {
                 const now = new Date()
                 const today = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
-                const value = {
-                    [lang]: {
-                        [today]: [word]
-                    }
-                }
-                if (dictionary.hasOwnProperty(resource)) {
-                    if (dictionary[resource].hasOwnProperty(lang)) {
-                        if (dictionary[resource][lang].hasOwnProperty(today)) {
-                            dictionary[resource][lang][today].push(word)
-                        } else {
-                            dictionary[resource][lang][today] = [word]
-                        }
-                    } else {
-                        dictionary[resource][lang] = {[today]: [word]}
-                    }
-                    chrome.storage.local.set(dictionary, () => console.log(`Updated: ${JSON.stringify(dictionary)}`))
+                const list = get(dictionary, [resource, lang, today])
+
+                if (list === undefined) {
+                    set(dictionary, [resource, lang, today], [word])
                 } else {
-                    chrome.storage.local.set({
-                        [resource]: value
-                    }, () => console.log(`Saved: ${resource} -> ${JSON.stringify(value)}`))
+                    list.push(word)
                 }
+                
+                chrome.storage.local.set(dictionary, () => console.log(`Updated: ${JSON.stringify(dictionary)}`))
             })
         }
         return true
