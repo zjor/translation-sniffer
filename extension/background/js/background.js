@@ -25,6 +25,6 @@ chrome.webRequest.onBeforeRequest.addListener(function(event) {
 }, filter);
 
 chrome.browserAction.onClicked.addListener((event) => {
-	chrome.tabs.create({ url: 'history.html' })
+	chrome.tabs.create({ url: 'dist/index.html' })
 })
 

@@ -12,6 +12,5 @@
 	"browser_action": {},
 	"background": {
 		"page": "./background/background.html"
-		// "persistent": false
 	}
 }
