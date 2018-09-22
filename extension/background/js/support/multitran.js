@@ -1,4 +1,4 @@
-import { storeWord } from './commons.js'
+import { storeWord, translate } from './commons.js'
 
 const resource = "multitran"
 const regex = /.*?:\/\/.*?\.multitran\.ru\/.*/
@@ -18,7 +18,10 @@ const multitran = (req) => {
             const now = new Date()
             const today = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
 
-            storeWord(lang, today, { word, resource })
+            storeWord(lang, today, word, { resource })
+            translate(word, "eng", "rus").then((res) => {
+                storeWord(lang, today, word, { translation: res.tuc[0].phrase.text }, false)                
+            })
         }
         return true
     }
