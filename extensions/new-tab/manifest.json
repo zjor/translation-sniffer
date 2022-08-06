@@ -1,0 +1,12 @@
+{
+  "name": "Translation History",
+  "description": "Shows a history of usage of a dictionary.",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions":[
+    "identity", "identity.email"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  }
+}
