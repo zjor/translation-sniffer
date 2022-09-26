@@ -4,7 +4,7 @@
   "version": "1.0",
   "manifest_version": 3,
   "permissions":[
-    "identity", "identity.email"
+    "identity", "identity.email", "storage"
   ],
   "chrome_url_overrides": {
     "newtab": "index.html"
